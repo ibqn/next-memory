@@ -1,8 +1,7 @@
 import Game from 'components/game'
 import Head from 'next/head'
-import Image from 'next/image'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -15,3 +14,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Card from 'components/card'
+import useStore from 'store'
 
 const StyledBoard = styled.div`
   display: grid;
@@ -8,7 +9,9 @@ const StyledBoard = styled.div`
   gap: 5px;
 `
 
-const Board = ({ cards }) => {
+const Board = () => {
+  const cards = useStore((state) => state.cards)
+
   return (
     <StyledBoard>
       {cards.map((card, index) => (

@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import Image from 'next/image'
+
+import cover from 'images/cover.png'
 
 const StyledCard = styled.div`
   position: relative;
@@ -40,8 +43,8 @@ const Card = ({ card, handleChoice, flipped, disabled }) => {
 
   return (
     <StyledCard flipped={flipped}>
-      <img src={card.src} alt="card front" />
-      <img src="/img/cover.png" onClick={handleClick} alt="cover" />
+      {/* <Image src={card.src} width={100} height={100} alt="card front" /> */}
+      <Image src={cover} width={100} height={100} onClick={handleClick} alt="cover" />
     </StyledCard>
   )
 }
