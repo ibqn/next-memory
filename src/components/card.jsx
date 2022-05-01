@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image from 'next/image'
 
 import cover from 'images/cover.png'
+import useStore from 'store'
 
 const StyledCard = styled.div`
   position: relative;
@@ -12,39 +13,48 @@ const StyledCard = styled.div`
     border: 2px solid #cfff;
     border-radius: 6px;
   }
-
-  .front {
-    transform: rotateY(90deg);
-    transition: all ease-in 0.2s;
-    position: absolute;
-  }
-  .flipped .front {
-    transform: rotateY(0deg);
-    transition-delay: 0.2s;
-  }
-
-  .back {
-    transition: all ease-in 0.2s;
-    transition-delay: 0.2s;
-  }
-
-  .flipped .back {
-    transform: rotateY(90deg);
-    transition-delay: 0s;
-  }
 `
 
-const Card = ({ card, handleChoice, flipped, disabled }) => {
+const Front = styled.div`
+  transform: rotateY(90deg);
+  transition: all ease-in 0.2s;
+  position: absolute;
+
+  ${({ flipped }) =>
+    flipped &&
+    css`
+      transform: rotateY(0deg);
+      transition-delay: 0.2s;
+    `}
+`
+
+const Back = styled.div`
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
+
+  ${({ flipped }) =>
+    flipped &&
+    css`
+      transform: rotateY(90deg);
+      transition-delay: 0s;
+    `}
+`
+
+const Card = ({ card, index }) => {
+  const flipCard = useStore((state) => state.flipCard)
   const handleClick = () => {
-    if (!disabled) {
-      handleChoice(card)
-    }
+    console.log('clicked', card.index, 'with index', index)
+    flipCard(index)
   }
 
   return (
-    <StyledCard flipped={flipped}>
-      {/* <Image src={card.src} width={100} height={100} alt="card front" /> */}
-      <Image src={cover} width={100} height={100} onClick={handleClick} alt="cover" />
+    <StyledCard onClick={handleClick}>
+      <Front flipped={card.flipped}>
+        <Image src={card.src} width={200} height={200} alt="card front" />
+      </Front>
+      <Back flipped={card.flipped}>
+        <Image src={cover} width={200} height={200} alt="cover" />
+      </Back>
     </StyledCard>
   )
 }

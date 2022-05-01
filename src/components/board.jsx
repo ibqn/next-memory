@@ -4,8 +4,8 @@ import useStore from 'store'
 
 const StyledBoard = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(4, 200px);
+  grid-template-rows: repeat(3, 200px);
   gap: 5px;
 `
 
@@ -15,7 +15,7 @@ const Board = () => {
   return (
     <StyledBoard>
       {cards.map((card, index) => (
-        <Card key={index} card={card} />
+        <Card key={index} card={card} index={index} />
       ))}
     </StyledBoard>
   )
