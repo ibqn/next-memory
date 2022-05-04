@@ -4,7 +4,7 @@ import Image from 'next/image'
 import cover from 'images/cover.png'
 import useStore from 'store'
 
-const StyledCard = styled.div`
+const CardFrame = styled.div`
   position: relative;
 
   img {
@@ -42,20 +42,21 @@ const Back = styled.div`
 
 const Card = ({ card, index }) => {
   const flipCard = useStore((state) => state.flipCard)
+
   const handleClick = () => {
     console.log('clicked', card.index, 'with index', index)
     flipCard(index)
   }
 
   return (
-    <StyledCard onClick={handleClick}>
+    <CardFrame onClick={handleClick}>
       <Front flipped={card.flipped}>
         <Image src={card.src} width={200} height={200} alt="card front" />
       </Front>
       <Back flipped={card.flipped}>
         <Image src={cover} width={200} height={200} alt="cover" />
       </Back>
-    </StyledCard>
+    </CardFrame>
   )
 }
 
