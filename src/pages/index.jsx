@@ -1,5 +1,14 @@
 import Game from 'components/game'
 import Head from 'next/head'
+import styled from 'styled-components'
+
+const Main = styled.main`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100vh;
+  align-items: center;
+  justify-items: center;
+`
 
 const Home = () => {
   return (
@@ -9,8 +18,12 @@ const Home = () => {
         <meta name="description" content="Memory game" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>memory</div>
-      <Game />
+      <Main>
+        <header>
+          <h1>memory</h1>
+          <Game />
+        </header>
+      </Main>
     </>
   )
 }

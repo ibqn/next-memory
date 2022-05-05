@@ -23,10 +23,39 @@ const shuffleCards = () => shuffle([...cardsPool, ...cardsPool])
 
 const useStore = create((set) => ({
   cards: shuffleCards(),
+  currentSelection: [],
+  stopFlip: false,
+  flipOver: () =>
+    set((state) => {
+      const [firstIndex, secondIndex] = state.currentSelection
+      const cards = state.cards.map((card, idx) =>
+        idx === firstIndex || idx === secondIndex ? { ...card, flipped: !card.flipped } : card
+      )
+      return { stopFlip: false, currentSelection: [], cards }
+    }),
+  resetSelection: () => set({ currentSelection: [] }),
   flipCard: (index) =>
-    set((state) => ({
-      cards: state.cards.map((card, idx) => (idx === index ? { ...card, flipped: !card.flipped } : card)),
-    })),
+    set((state) => {
+      let cards = state.cards.map((card, idx) => (idx === index ? { ...card, flipped: !card.flipped } : card))
+
+      if (state.currentSelection.length === 0) {
+        return { currentSelection: [index], cards }
+      }
+
+      const [firstIndex] = state.currentSelection
+      const firstCard = state.cards[firstIndex]
+      const secondCard = state.cards[index]
+
+      if (firstIndex !== index) {
+        if (firstCard.index === secondCard.index) {
+          cards = cards.map((card, idx) => (idx === firstIndex || idx === index ? { ...card, disabled: true } : card))
+        } else {
+          return { cards, stopFlip: true, currentSelection: [firstIndex, index] }
+        }
+      }
+
+      return { cards, currentSelection: [] }
+    }),
   resetCards: () => set({ cards: shuffleCards() }),
 }))
 

@@ -2,10 +2,10 @@ import Board from 'components/board'
 
 const Game = () => {
   return (
-    <main>
+    <div>
       <div>game</div>
       <Board />
-    </main>
+    </div>
   )
 }
 

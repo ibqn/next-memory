@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 
@@ -42,11 +43,22 @@ const Back = styled.div`
 
 const Card = ({ card, index }) => {
   const flipCard = useStore((state) => state.flipCard)
+  const stopFlip = useStore((state) => state.stopFlip)
+  const flipOver = useStore((state) => state.flipOver)
 
   const handleClick = () => {
+    if (stopFlip || card.disabled) {
+      return
+    }
     console.log('clicked', card.index, 'with index', index)
     flipCard(index)
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => stopFlip && flipOver(), 2 * 1000)
+
+    return () => clearTimeout(timer)
+  }, [stopFlip, flipOver])
 
   return (
     <CardFrame onClick={handleClick}>
