@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
@@ -21,8 +23,8 @@ const Front = styled.div`
   transition: all ease-in 0.2s;
   position: absolute;
 
-  ${({ flipped }) =>
-    flipped &&
+  ${({ $flipped }) =>
+    $flipped &&
     css`
       transform: rotateY(0deg);
       transition-delay: 0.2s;
@@ -33,8 +35,8 @@ const Back = styled.div`
   transition: all ease-in 0.2s;
   transition-delay: 0.2s;
 
-  ${({ flipped }) =>
-    flipped &&
+  ${({ $flipped }) =>
+    $flipped &&
     css`
       transform: rotateY(90deg);
       transition-delay: 0s;
@@ -62,11 +64,11 @@ const Card = ({ card, index }) => {
 
   return (
     <CardFrame onClick={handleClick}>
-      <Front flipped={card.flipped}>
+      <Front $flipped={card.flipped}>
         <Image src={card.src} width={200} height={200} alt="card front" />
       </Front>
-      <Back flipped={card.flipped}>
-        <Image src={cover} width={200} height={200} alt="cover" />
+      <Back $flipped={card.flipped}>
+        <Image src={cover} width={200} height={200} alt="cover" priority />
       </Back>
     </CardFrame>
   )
