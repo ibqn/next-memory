@@ -21,7 +21,7 @@ const cardsPool = Array.from({ length: 6 }, (_, index) => ({
 
 const shuffleCards = () => shuffle([...cardsPool, ...cardsPool])
 
-const useStore = create((set) => ({
+export const useStore = create((set) => ({
   cards: shuffleCards(),
   currentSelection: [],
   stopFlip: false,
@@ -58,5 +58,3 @@ const useStore = create((set) => ({
     }),
   resetCards: () => set({ cards: shuffleCards() }),
 }))
-
-export default useStore

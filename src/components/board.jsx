@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 import Card from 'components/card'
-import useStore from 'store'
+import { useStore } from 'store'
 import { useEffect, useState } from 'react'
 
 const BoardFrame = styled.div`

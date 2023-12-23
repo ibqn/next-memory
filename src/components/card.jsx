@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import Image from 'next/image'
 
 import cover from 'images/cover.png'
-import useStore from 'store'
+import { useStore } from 'store'
 
 const CardFrame = styled.div`
   position: relative;
