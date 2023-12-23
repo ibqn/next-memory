@@ -2,12 +2,14 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import '@fontsource/montserrat'
 
-const GlobalStyle = createGlobalStyle`
+const styled = { createGlobalStyle }
+
+const GlobalStyle = styled.createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:  ${({ theme }) => theme.font.family};
+    font-family: ${({ theme }) => theme.font.family};
   }
 `
 
