@@ -1,5 +1,5 @@
-import create from 'zustand'
-import shuffle from 'lodash/shuffle'
+import { create } from 'zustand'
+import shuffle from 'lodash.shuffle'
 
 import helmet from 'images/helmet.png'
 import potion from 'images/potion.png'
