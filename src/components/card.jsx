@@ -45,10 +45,13 @@ const Back = styled.div`
 const Card = ({ card, index }) => {
   const flipCard = useStore((state) => state.flipCard)
   const stopFlip = useStore((state) => state.stopFlip)
+  const currentSelection = useStore((state) => state.currentSelection)
   const flipOver = useStore((state) => state.flipOver)
 
   const handleClick = () => {
-    if (stopFlip || card.disabled) {
+    const alreadyFlipped = currentSelection.includes(index)
+
+    if (stopFlip || card.disabled || alreadyFlipped) {
       return
     }
     console.log('clicked', card.index, 'with index', index)
