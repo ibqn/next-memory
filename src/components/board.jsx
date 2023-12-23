@@ -1,6 +1,9 @@
+'use client'
+
 import styled from 'styled-components'
 import Card from 'components/card'
 import useStore from 'store'
+import { useEffect, useState } from 'react'
 
 const BoardFrame = styled.div`
   display: grid;
@@ -11,6 +14,16 @@ const BoardFrame = styled.div`
 
 const Board = () => {
   const cards = useStore((state) => state.cards)
+
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
 
   return (
     <BoardFrame>
